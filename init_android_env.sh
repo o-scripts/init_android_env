@@ -82,9 +82,11 @@ while [ -n ${arch_t} ]; do
 	case ${arch_t} in
 		x86_64)
 			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86_64-20130514.zip;
+			adt_file=adt-bundle-linux-x86_64-20130514;
 			break;;
 		i386)
 			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86-20130514.zip;
+			adt_file=adt-bundle-linux-x86-20130514;
 			break;;
 		*)
 			echo "This machine is not in list";
@@ -92,11 +94,11 @@ while [ -n ${arch_t} ]; do
 	esac
 done
 
-unzip -x *.zip
+unzip -x ${adt_file}.zip
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
 fi
-mv * ../android
+mv ${adt_file} ../android
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
 if [ -e ~/android/bin ]; then
