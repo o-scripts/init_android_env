@@ -48,7 +48,7 @@ if [ -e ~/tmp ]; then
 else
 	mkdir tmp
 fi
-cd tmp
+cd ~/tmp
 # set source for apt-get
 echo "Step 2. Add need source for install jdk"
 sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
@@ -82,18 +82,17 @@ while [ -n ${arch_t} ]; do
 	case ${arch_t} in
 		x86_64)
 			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86_64-20130514.zip;
-			adt_file=adt-bundle-linux-x86_64-20130514;
+			adt_file="adt-bundle-linux-x86_64-20130514";
 			break;;
 		i386)
 			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86-20130514.zip;
-			adt_file=adt-bundle-linux-x86-20130514;
+			adt_file="adt-bundle-linux-x86-20130514";
 			break;;
 		*)
 			echo "This machine is not in list";
 			break;;
 	esac
 done
-
 unzip -x ${adt_file}.zip
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
