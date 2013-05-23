@@ -130,7 +130,7 @@ export WORKDIR=~/android
 export JAVA_DIR=/usr/lib/jvm/java-6-sun
 export JAVA_HOME=\${JAVA_DIR}
 export CLASSPATH=.:\${JAVA_HOME}/lib/dt.jar:\${JAVA_HOME}/lib/tools.jar
-export SDK_HOME=\${WORKDIR}/android-sdk-linux
+export SDK_HOME=\${WORKDIR}/sdk
 export ECLIPSE_HOME=\${WORKDIR}/eclipse
 export PATH=\${WORKDIR}/bin:\${PATH}:\${JAVA_HOME}/bin:\${SDK_HOME}/tools:\${SDK_HOME}/platform-tools:\${WORKDIR}/eclipse" >> ~/.bashrc
 # availiable env set
