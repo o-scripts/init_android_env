@@ -97,8 +97,9 @@ done
 unzip -x ${adt_file}.zip
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
+	rm -rvf ~/android
 fi
-mv ${adt_file} ../android
+mv ${adt_file} ~/android
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
 if [ -e ~/android/bin ]; then
@@ -114,7 +115,7 @@ if [ -e ~/android/bin/gcc ]; then
 else
 	ln -s /usr/bin/gcc-4.5 gcc;
 fi
-if [ -e ~/android/bin/g++]; then
+if [ -e ~/android/bin/g++ ]; then
 	echo "g++ is exist";
 	rm ~/android/bin/g++;
 	ln -s /usr/bin/g++-4.5 g++;
