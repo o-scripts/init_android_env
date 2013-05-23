@@ -65,7 +65,7 @@ export JAVA_HOME=\${JAVA_DIR}
 export CLASSPATH=.:\${JAVA_HOME}/lib/dt.jar:\${JAVA_HOME}/lib/tools.jar
 export SDK_HOME=\${WORKDIR}/android-sdk-linux
 export ECLIPSE_HOME=\${WORKDIR}/eclipse
-export PATH=\${WORKDIR}/bin:\${PATH}:\${JAVA_HOME}/bin:\${SDK_HOME}/tools:\${SDK_HOME}/platform-tools:\${WORKDIR}/eclipse" > ~/.bashrc
+export PATH=\${WORKDIR}/bin:\${PATH}:\${JAVA_HOME}/bin:\${SDK_HOME}/tools:\${SDK_HOME}/platform-tools:\${WORKDIR}/eclipse" >> ~/.bashrc
 # availiable env set
 source ~/.bashrc
 # clear tmp file, folder
