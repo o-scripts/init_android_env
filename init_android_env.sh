@@ -102,8 +102,20 @@ else
 	mkdir ~/android/bin
 fi
 cd ~/android/bin
-ln -s /usr/bin/gcc-4.5 gcc
-ln -s /usr/bin/g++-4.5 g++
+if [ -e ~/android/bin/gcc ]; then
+	echo "gcc is exist";
+	rm -vf ~/android/bin/gcc;
+	ln -s /usr/bin/gcc-4.5 gcc;
+else
+	ln -s /usr/bin/gcc-4.5 gcc;
+fi
+if [ -e ~/android/bin/g++]; then
+	echo "g++ is exist";
+	rm ~/android/bin/g++;
+	ln -s /usr/bin/g++-4.5 g++;
+else
+	ln -s /usr/bin/g++-4.5 g++;
+fi
 # go to home
 cd ~
 # set android sdk, eclipse, JAVA_HOME, CLASSPATH
