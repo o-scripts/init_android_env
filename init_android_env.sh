@@ -92,7 +92,10 @@ while [ -n ${arch_t} ]; do
 	esac
 done
 
-zip -x *.zip
+unzip -x *.zip
+if [ -e ~/android ]; then
+	echo "rm -vf ~/android"
+fi
 mv * ../android
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
