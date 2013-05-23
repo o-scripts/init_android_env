@@ -12,9 +12,21 @@
 arch_t=`uname -i`
 cd ~
 echo "Step 1. Create need folder"
-mkdir android
-mkdir code
-mkdir tmp
+if [ -e ~/android ]; then
+	echo "~/android is exist"
+else
+	mkdir android
+fi
+if [ -e ~/code ]; then
+	echo "~/code is exist"
+else
+	mkdir code
+fi
+if [ -e ~/tmp ]; then
+	echo "~/tmp is exist"
+else
+	mkdir tmp
+fi
 cd tmp
 # set source for apt-get
 echo "Step 2. Add need source for install jdk"
@@ -45,12 +57,29 @@ echo "Step 7. Install gcc, g++ for 4.5"
 sudo apt-get -y install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
 # download adt, which include eclipse, sdk
 echo "Step 8. Download eclipse and sdk"
-axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-${arch_t}-20130514.zip
+while [ -n ${arch_t} ]; do
+	case ${arch_t} in
+		x86_64)
+			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86_64-20130514.zip;
+			break;;
+		i386)
+			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86-20130514.zip;
+			break;;
+		*)
+			echo "This machine is not in list";
+			break;;
+	esac
+done
+
 zip -x *.zip
 mv * ../android
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
-mkdir ~/android/bin
+if [ -e ~/android/bin ]; then
+	echo "~/android/bin is exist";
+else
+	mkdir ~/android/bin
+fi
 cd ~/android/bin
 ln -s /usr/bin/gcc-4.5 gcc
 ln -s /usr/bin/g++-4.5 g++
