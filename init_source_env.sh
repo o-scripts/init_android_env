@@ -49,9 +49,11 @@ else
 fi
 
 # back up for old source.list file
+echo "backup old source.list"
 sudo cp ${SOURCE_LIST_FILE} ${BK_SOURCE_LIST_FILE}
 
 # import new source
+echo "import new source"
 sudo echo "# create ${BK_SOURCE_LIST_FILE}
 deb-src http://mirrors.163.com/ubuntu/ ${OS_VER} main restricted #Added by software-properties
 
