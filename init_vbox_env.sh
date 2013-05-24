@@ -48,13 +48,18 @@ VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
 VBOX_URL=${VBOX_HOST}${VBOX_FILE}
 mkdir -p ${TMP_FOLD}
 cd ${TMP_FOLD}
-# axel -n 10 ${VBOX_URL}
-# sudo dpkg -i ${VBOX_FILE}
+axel -n 10 ${VBOX_URL}
+sudo dpkg -i ${VBOX_FILE}
 cd ~; rm -rvf ${TMP_FOLD}
 
-echo ${ARCH}
-echo ${OS_VER}
-echo ${VBOX_HOST}
-echo ${VBOX_FILE}
-echo ${VBOX_URL}
+########################################################################
+# test area
+#
+# echo ${ARCH}
+# echo ${OS_VER}
+# echo ${VBOX_HOST}
+# echo ${VBOX_FILE}
+# echo ${VBOX_URL}
+#
+########################################################################
 
