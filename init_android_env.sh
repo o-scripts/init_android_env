@@ -33,22 +33,9 @@ VERSION="0.1"
 arch_t=`uname -i`
 cd ~
 echo "Step 1. Create need folder"
-if [ -e ~/android ]; then
-	echo "~/android is exist"
-else
-	mkdir android
-fi
-if [ -e ~/code ]; then
-	echo "~/code is exist"
-else
-	mkdir code
-fi
-if [ -e ~/tmp ]; then
-	echo "~/tmp is exist"
-else
-	mkdir tmp
-fi
-cd ~/tmp
+TMP_FOLD=~/.tmp
+mkdir -p ${TMP_FOLD}
+cd ${TMP_FOLD}
 # set source for apt-get
 echo "Step 2. Add need source for install jdk"
 sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
@@ -101,11 +88,7 @@ fi
 mv ${adt_file} ~/android
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
-if [ -e ~/android/bin ]; then
-	echo "~/android/bin is exist";
-else
-	mkdir ~/android/bin
-fi
+mkdir -p ~/android/bin
 cd ~/android/bin
 if [ -e ~/android/bin/gcc ]; then
 	echo "gcc is exist";
@@ -137,7 +120,7 @@ export PATH=\${WORKDIR}/bin:\${PATH}:\${JAVA_HOME}/bin:\${SDK_HOME}/tools:\${SDK
 source ~/.bashrc
 # clear tmp file, folder
 echo "Step 11. Clean tmp file, folder"
-rm -rvf ~/tmp
+rm -rvf ${TMP_FOLD}
 echo "Last Step:
 Now you can use below command to available set now
 \"source ~/.bashrc\"
