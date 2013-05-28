@@ -46,7 +46,7 @@ This file have use in init_android_env, you can also use it single.
 
 Just as `sh init_source_env.sh` or `./init_source_env.sh`
 
-init_virtualbox_env
+init_vbox_env
 ================
 
 This file is download virtualbox package and install.
