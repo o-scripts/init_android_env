@@ -31,7 +31,7 @@ VERSION="0.1"
 ARCH=`uname -i`
 OS_VER=`lsb_release -c | awk '{ print $2}'`
 ARCH_VER="i386"
-TMP_FOLD="~/.tmp"
+TMP_FOLD=".tmp"
 while [ -n ${ARCH} ]; do
 	case ${ARCH} in
 		x86_64)
@@ -50,7 +50,8 @@ mkdir -p ${TMP_FOLD}
 cd ${TMP_FOLD}
 axel -n 10 ${VBOX_URL}
 sudo dpkg -i ${VBOX_FILE}
-cd ~; rm -rvf ${TMP_FOLD}
+cd ~;
+rm -rvf ${TMP_FOLD}
 
 ########################################################################
 # test area
