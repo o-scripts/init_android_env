@@ -32,3 +32,17 @@ Intall Step
 - Step 9. Set gcc, g++
 - Step 10. Add var for self set
 - Step 11. Clean tmp file, folder
+
+
+init_source_env
+================
+
+This file is add mirrors.163.com to source.list, which is improve your download speed.
+
+USEAGE
+----------------
+
+This file have use in init_android_env, you can also use it single.
+
+Just as `sh init_source_env.sh` or `./init_source_env.sh`
+
