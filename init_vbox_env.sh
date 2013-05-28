@@ -32,6 +32,7 @@ ARCH=`uname -i`
 OS_VER=`lsb_release -c | awk '{ print $2}'`
 ARCH_VER="i386"
 TMP_FOLD=".tmp"
+UPDIR=".."
 while [ -n ${ARCH} ]; do
 	case ${ARCH} in
 		x86_64)
@@ -46,12 +47,12 @@ done
 VBOX_HOST="http://download.virtualbox.org/virtualbox/4.2.12/"
 VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
 VBOX_URL=${VBOX_HOST}${VBOX_FILE}
-mkdir -p ${TMP_FOLD}
-cd ${TMP_FOLD}
+mkdir -p ./${TMP_FOLD}
+cd ./${TMP_FOLD}
 axel -n 10 ${VBOX_URL}
 sudo dpkg -i ${VBOX_FILE}
-cd ~;
-rm -rvf ${TMP_FOLD}
+cd ${UPDIR}
+rm -rvf ./${TMP_FOLD}
 
 ########################################################################
 # test area
