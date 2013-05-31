@@ -27,7 +27,7 @@
 # THE SOFTWARE.
 ########################################################################
 
-VERSION="0.1"
+VERSION="0.2"
 
 SOURCE_LIST_FILE="/etc/apt/sources.list"
 # SOURCE_LIST_FILE="source.list"

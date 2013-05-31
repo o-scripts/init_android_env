@@ -27,7 +27,7 @@
 # THE SOFTWARE.
 ########################################################################
 
-VERSION="0.1"
+VERSION="0.2"
 ARCH=`uname -i`
 OS_VER=`lsb_release -c | awk '{ print $2}'`
 ARCH_VER="i386"

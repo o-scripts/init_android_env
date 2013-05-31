@@ -27,7 +27,7 @@
 # THE SOFTWARE.
 ########################################################################
 
-VERSION="0.1"
+VERSION="0.2"
 
 # Get arch Info
 arch_t=`uname -i`
