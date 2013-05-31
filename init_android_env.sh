@@ -40,6 +40,8 @@ ZIP_INIT_ANDROID_ENV_FILE="${PROJECT_BRANCH}.zip"
 URL_INIT_SOURCE_FILE="${HOST_INIT_ENV}${ZIP_INIT_ANDROID_ENV_FILE}"
 LOCAL_BASHRC_FILE="$HOME/.bashrc"
 TMP_FOLD=".tmp"
+SOURCE_LIST_FILE="/etc/apt/sources.list"
+SOURCE_URL="http://archive.ubuntu.com/ubuntu"
 
 cd ${HOME}
 echo "Step 1. Create need folder"
@@ -48,12 +50,21 @@ cd ${HOME}/${TMP_FOLD}
 
 # set source for apt-get
 echo "Step 2. Add need source for install jdk"
-sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy main multiverse"
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy-updates main multiverse"
+IS_EXIST=`cat ${SOURCE_LIST_FILE} | egrep "hardy" | awk '{print $2}' | tail -n 1 | xargs echo`
+echo "${IS_EXIST}"
+if [ "${SOURCE_URL}" = "${IS_EXIST}" ]; then
+	echo "Have add, not add again"
+else
+	sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
+	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy main multiverse"
+	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy-updates main multiverse"
+fi
+
+# download tools
 sudo apt-get -y install wget axel
+
 read -p "If you need to add 163 source? [y/N]" var
-while [ -n var ]; do
+while [ -n $var ]; do
 	case $var in
 		y|Y|yes|Yes)
 			if [ -e ${INIT_SOURCE_FILE} ]; then
@@ -62,7 +73,18 @@ while [ -n var ]; do
 				wget ${URL_INIT_SOURCE_FILE}
 				unzip ${ZIP_INIT_ANDROID_ENV_FILE}
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
-				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
+				read -p "If you want install virtualbox? [y/N]" vbox
+				while [ -n $vbox ]; do
+					case $vbox in
+						y|Y|yes|Yes)
+							echo "Install virtualbox ..."
+							sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
+							break;;
+						*)
+							echo "Not install virtualbox"
+							breka;;
+					esac
+				done
 			fi
 			break;;
 		*)
