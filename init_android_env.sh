@@ -34,6 +34,7 @@ arch_t=`uname -i`
 PROJECT_NAME="init_android_env"
 PROJECT_BRANCH="master"
 INIT_SOURCE_FILE="init_source_env.sh"
+INIT_VBOX_FILE="init_vbox_env.sh"
 HOST_INIT_ENV="https://github.com/GdZ/${PROJECT_NAME}/archive/"
 ZIP_INIT_ANDROID_ENV_FILE="${PROJECT_BRANCH}.zip"
 URL_INIT_SOURCE_FILE="${HOST_INIT_ENV}${ZIP_INIT_ANDROID_ENV_FILE}"
@@ -61,6 +62,7 @@ while [ -n var ]; do
 				wget ${URL_INIT_SOURCE_FILE}
 				unzip ${ZIP_INIT_ANDROID_ENV_FILE}
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
+				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
 			fi
 			break;;
 		*)
