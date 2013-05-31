@@ -145,12 +145,23 @@ while [ -n ${arch_t} ]; do
 			break;;
 	esac
 done
-unzip -x ${adt_file}.zip
+
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
-	rm -rvf ~/android
+	read -p "Make sure you want to delete folder[~/android]" isDel
+	while [ -n ${isDel} ]; do
+		case ${isDel} in
+			y|Y|yes|Yes)
+				unzip -x ${adt_file}.zip
+				rm -rvf ~/android
+				mv ${adt_file} ~/android
+				break;;
+			*)
+				echo "Not delete this folder"
+				break;;
+		esac
+	done
 fi
-mv ${adt_file} ~/android
 
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
