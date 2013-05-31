@@ -52,7 +52,7 @@ cd ./${TMP_FOLD}
 axel -n 10 ${VBOX_URL}
 sudo dpkg -i ${VBOX_FILE}
 cd ${UPDIR}
-rm -rvf ./${TMP_FOLD}
+# rm -rvf ./${TMP_FOLD}
 
 ########################################################################
 # test area
