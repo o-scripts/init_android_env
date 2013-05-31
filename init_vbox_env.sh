@@ -33,6 +33,10 @@ OS_VER=`lsb_release -c | awk '{ print $2}'`
 ARCH_VER="i386"
 TMP_FOLD=".tmp"
 UPDIR=".."
+VBOX_HOST="http://download.virtualbox.org/virtualbox/4.2.12/"
+VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
+VBOX_URL=${VBOX_HOST}${VBOX_FILE}
+
 while [ -n ${ARCH} ]; do
 	case ${ARCH} in
 		x86_64)
@@ -44,12 +48,14 @@ while [ -n ${ARCH} ]; do
 	esac
 done
 
-VBOX_HOST="http://download.virtualbox.org/virtualbox/4.2.12/"
-VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
-VBOX_URL=${VBOX_HOST}${VBOX_FILE}
 mkdir -p ./${TMP_FOLD}
 cd ./${TMP_FOLD}
-axel -n 10 ${VBOX_URL}
+
+if [ -e $VOBX_FILE ]; then
+	echo "${VBOX_FILE} is exist."
+else
+	axel -n 10 ${VBOX_URL}
+fi
 sudo dpkg -i ${VBOX_FILE}
 cd ${UPDIR}
 # rm -rvf ./${TMP_FOLD}
