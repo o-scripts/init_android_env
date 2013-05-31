@@ -29,19 +29,21 @@
 
 VERSION="0.1"
 
-SOURCE_LIST_FILE="/etc/apt/source.list"
+SOURCE_LIST_FILE="/etc/apt/sources.list"
 # SOURCE_LIST_FILE="source.list"
 BK_SOURCE_LIST_FILE=${SOURCE_LIST_FILE}.`date +%Y.%m.%d.%H.%M`
 OS_VER=`lsb_release -c | awk '{ print $2}'`
-SOURCE_URL="http://mirrors.163.com/ubuntu/"
+SOURCE_163_URL="http://mirrors.163.com/ubuntu/"
 
+# If add 163 source
 IS_EXIST=`cat ${SOURCE_LIST_FILE} | egrep "163" | awk '{print $2}' | tail -n 1 | xargs echo`
 echo "${IS_EXIST}"
-if [ "${SOURCE_URL}" = "${IS_EXIST}" ]; then
+if [ "${SOURCE_163_URL}" = "${IS_EXIST}" ]; then
 	echo "Have add, not add again"
 	exit 0
 fi
 
+# is there is a sources.list file
 if [ -f ${SOURCE_LIST_FILE} ]; then
 	echo "${SOURCE_LIST_FILE} is exist"
 else
