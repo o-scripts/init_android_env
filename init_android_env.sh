@@ -70,6 +70,10 @@ while [ -n $var ]; do
 			if [ -e ${INIT_SOURCE_FILE} ]; then
 				echo "${INIT_SOURCE_FILE} is exist"
 			else
+				if [ -e ${URL_INIT_SOURCE_FILE} ]; then
+					echo "${URL_INIT_SOURCE_FILE} is exist"
+					rm -rvf ${URL_INIT_SOURCE_FILE}
+				fi
 				wget ${URL_INIT_SOURCE_FILE}
 				if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
 					echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
