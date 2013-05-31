@@ -71,6 +71,10 @@ while [ -n $var ]; do
 				echo "${INIT_SOURCE_FILE} is exist"
 			else
 				wget ${URL_INIT_SOURCE_FILE}
+				if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
+					echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
+					rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
+				fi
 				unzip ${ZIP_INIT_ANDROID_ENV_FILE}
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
 				read -p "If you want install virtualbox? [y/N]" vbox
