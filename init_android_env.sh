@@ -42,6 +42,9 @@ LOCAL_BASHRC_FILE="$HOME/.bashrc"
 TMP_FOLD=".tmp"
 SOURCE_LIST_FILE="/etc/apt/sources.list"
 SOURCE_URL="http://archive.ubuntu.com/ubuntu"
+GOOGLE_DEVELOPER_URL="http://developer.android.com/sdk/index.html#download"
+GOOGLE_ADT_HOST="http://dl.google.com/android/adt/"
+GOOGLE_ADT_URL=""
 
 cd ${HOME}
 echo "Step 1. Create need folder"
@@ -130,31 +133,48 @@ sudo apt-get -y install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
 
 # download adt, which include eclipse, sdk
 echo "Step 8. Download eclipse and sdk"
+curl ${GOOGLE_DEVELOPER_URL} > google.html
 while [ -n ${arch_t} ]; do
 	case ${arch_t} in
 		x86_64)
-			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86_64-20130514.zip;
-			adt_file="adt-bundle-linux-x86_64-20130514";
+			adt_file=`cat google.html | grep adt-bundle-linux-x86_64- | cut -d'>' -f 2 | cut -d'<' -f 1`
+			echo "$adt_file"
 			break;;
 		i386)
-			axel -n 10 http://dl.google.com/android/adt/adt-bundle-linux-x86-20130514.zip;
-			adt_file="adt-bundle-linux-x86-20130514";
+			adt_file=`cat google.html | grep adt-bundle-linux-x86- | cut -d'>' -f 2 | cut -d'<' -f 1`
+			echo "$adt_file"
 			break;;
 		*)
 			echo "This machine is not in list";
 			break;;
 	esac
 done
+GOOGLE_ADT_URL=${GOOGLE_ADT_HOST}${adt_file}
+echo ${GOOGLE_ADT_URL}
+# download
+read -p "Download ${GOOGLE_ADT_URL} or not?" dw
+while [ -n $dw ]; do
+	case ${dw} in
+		y|Y|yes|Yes)
+			axel -n 10 ${GOOGLE_ADT_URL};
+			break;;
+		*)
+			echo "Not download ${GOOGLE_ADT_URL}";
+			break;;
+	esac
+done
 
+# make sure delete the fold or not
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
 	read -p "Make sure you want to delete folder[~/android]" isDel
 	while [ -n ${isDel} ]; do
 		case ${isDel} in
 			y|Y|yes|Yes)
-				unzip -x ${adt_file}.zip
+				unzip -x ${adt_file}
+				adt_folder=`echo ${adt_file} | cut -d'.' -f 1`
 				rm -rvf ~/android
-				mv ${adt_file} ~/android
+				mv ${adt_folder} ~/android
 				break;;
 			*)
 				echo "Not delete this folder"
