@@ -152,7 +152,7 @@ done
 GOOGLE_ADT_URL=${GOOGLE_ADT_HOST}${adt_file}
 echo ${GOOGLE_ADT_URL}
 # download
-read -p "Download ${GOOGLE_ADT_URL} or not?" dw
+read -p "Download ${GOOGLE_ADT_URL} or not?[y/N]" dw
 while [ -n $dw ]; do
 	case ${dw} in
 		y|Y|yes|Yes)
@@ -167,7 +167,7 @@ done
 # make sure delete the fold or not
 if [ -e ~/android ]; then
 	echo "rm -vf ~/android"
-	read -p "Make sure you want to delete folder[~/android]" isDel
+	read -p "Make sure you want to delete folder(~/android) [y/N]" isDel
 	while [ -n ${isDel} ]; do
 		case ${isDel} in
 			y|Y|yes|Yes)
