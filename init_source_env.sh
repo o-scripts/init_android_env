@@ -52,7 +52,8 @@ fi
 
 # back up for old source.list file
 echo "backup old source.list"
-sudo cp ${SOURCE_LIST_FILE} ${BK_SOURCE_LIST_FILE}
+sudo cat ${SOURCE_LIST_FILE} > test.sh
+sudo mv ${SOURCE_LIST_FILE} ${BK_SOURCE_LIST_FILE}
 
 # import new source
 echo "import new source"
@@ -97,4 +98,6 @@ deb http://mirrors.163.com/ubuntu/ ${OS_VER}-security universe
 deb http://mirrors.163.com/ubuntu/ ${OS_VER}-security multiverse
 
 deb http://mirrors.163.com/ubuntu/ ${OS_VER}-proposed restricted main multiverse universe
-deb-src http://mirrors.163.com/ubuntu/ ${OS_VER}-proposed restricted main multiverse universe #Added by software-properties" >> ${SOURCE_LIST_FILE};
+deb-src http://mirrors.163.com/ubuntu/ ${OS_VER}-proposed restricted main multiverse universe #Added by software-properties" >> test.sh;
+sudo cp ./test.sh ${SOURCE_LIST_FILE};
+rm -vf ./test.sh
