@@ -51,7 +51,7 @@ done
 mkdir -p ./${TMP_FOLD}
 cd ./${TMP_FOLD}
 
-if [ -e ./$VOBX_FILE ]; then
+if [ -f ./$VOBX_FILE ]; then
 	echo "${VBOX_FILE} is exist."
 else
 	axel -n 10 ${VBOX_URL}
