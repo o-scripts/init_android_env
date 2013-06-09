@@ -1,4 +1,4 @@
-init_android_env
+init_android_env.sh
 ================
 
 Do you face some fatal with init your android build enviorment? Just use this shell script for fixed your problem.
@@ -18,7 +18,7 @@ Then use `./init_android_env.sh` to init your android enviorment.
 
 Good luck!
 
-Intall Step
+Step of run init_android_env.sh
 ----------------
 
 - Step 1. Create need folder
@@ -34,7 +34,7 @@ Intall Step
 - Step 11. Clean tmp file, folder
 
 
-init_source_env
+init_source_env.sh
 ================
 
 This file is add mirrors.163.com to source.list, which is improve your download speed.
@@ -46,7 +46,8 @@ This file have use in init_android_env, you can also use it single.
 
 Just as `sh init_source_env.sh` or `./init_source_env.sh`
 
-init_vbox_env
+
+init_vbox_env.sh
 ================
 
 This file is download virtualbox package and install.
@@ -58,7 +59,8 @@ Just use follow command:
 
 `sh init_vbox_env.sh` or `./init_vbox_env.sh`
 
+
 License
-----------------
+================
 
 `init_android_env` is license under the [MIT](http://opensource.org/licenses/MIT) license. See [LICENSE.md](https://github.com/GdZ/init_android_env/blob/master/LICENSE.md)
