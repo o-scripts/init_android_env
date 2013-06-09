@@ -58,3 +58,7 @@ Just use follow command:
 
 `sh init_vbox_env.sh` or `./init_vbox_env.sh`
 
+License
+----------------
+
+`init_android_env` is license under the [MIT](http://opensource.org/licenses/MIT) license. See [LICENSE.md](https://github.com/GdZ/init_android_env/blob/master/LICENSE.md)

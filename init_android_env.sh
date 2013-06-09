@@ -6,7 +6,9 @@
 # Email: zgd1348833@gmail.com
 # Date: @2013.05.23
 #
-# Copyright (c) 2013 Computer Science, City Colleges, Xi'an Jiaotong University
+# Copyright (c) 2013, M.R.Z. All rights reserved.
+#
+# Licensed under the MIT license <http://opensource.org/licenses/MIT>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
