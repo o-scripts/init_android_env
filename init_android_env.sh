@@ -86,6 +86,13 @@ while [ -n $var ]; do
 				fi
 				unzip ${ZIP_INIT_ANDROID_ENV_FILE}
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
+
+				# Here musst be update, upgrade, dist-upgrade
+				sudo apt-get update;
+				sudo apt-get -y upgrade;
+				suod apt-get -y dist-upgrade;
+
+				# Give tips for install virtualbox or not
 				read -p "If you want install virtualbox? [y/N]" vbox
 				while [ -n $vbox ]; do
 					case $vbox in
