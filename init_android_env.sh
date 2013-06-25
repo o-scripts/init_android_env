@@ -66,7 +66,7 @@ else
 fi
 
 # download tools
-sudo apt-get -y install wget axel
+sudo apt-get install wget axel
 
 read -p "If you need to add 163 source? [y/N]" var
 while [ -n $var ]; do
@@ -89,8 +89,8 @@ while [ -n $var ]; do
 
 				# Here musst be update, upgrade, dist-upgrade
 				sudo apt-get update;
-				sudo apt-get -y upgrade;
-				suod apt-get -y dist-upgrade;
+				sudo apt-get upgrade;
+				suod apt-get dist-upgrade;
 
 				# Give tips for install virtualbox or not
 				read -p "If you want install virtualbox? [y/N]" vbox
@@ -119,26 +119,26 @@ sudo apt-get update
 
 # install sun-java6-jdk
 echo "Step 4. Install jdk"
-sudo apt-get -y install sun-java6-jdk
+sudo apt-get install sun-java6-jdk
 
 # ubuntu 10.04 -- 11.10
 echo "Step 5. Install some tools need for build"
-sudo apt-get -y install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev x11proto-core-dev libx11-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown  libxml2-utils xsltproc
+sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev x11proto-core-dev libx11-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown  libxml2-utils xsltproc
 # ubuntu 12.04
-sudo apt-get -y install git gnupg flex bison gperf build-essential zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos  python-markdown libxml2-utils xsltproc zlib1g-dev:i386
+sudo apt-get install git gnupg flex bison gperf build-essential zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos  python-markdown libxml2-utils xsltproc zlib1g-dev:i386
 # maybe error package
 echo "NOTICE: The follow package maybe install failed"
-sudo apt-get -y install lib32ncurses5-dev ia32-libs lib32readline5-dev lib32z-dev
+sudo apt-get install lib32ncurses5-dev ia32-libs lib32readline5-dev lib32z-dev
 # ubuntu 11.10
-sudo apt-get -y install libx11-dev:i386
+sudo apt-get install libx11-dev:i386
 
 # for ssh, git, wget, axel
 echo "Step 6. Install tools for download code"
-sudo apt-get -y install vim git gitk ssh sshfs wget axel
+sudo apt-get install vim git gitk ssh sshfs wget axel
 
 # install gcc 4.5 or 4.4
 echo "Step 7. Install gcc, g++ for 4.5"
-sudo apt-get -y install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
+sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
 
 # download adt, which include eclipse, sdk
 echo "Step 8. Download eclipse and sdk"
