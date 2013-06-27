@@ -6,7 +6,7 @@
 # Email: zgd1348833@gmail.com
 # Date: @2013.05.23
 #
-# Copyright (c) 2013, M.R.Z. All rights reserved.
+# Copyright (c) 2013 M.R.Z <zgd1348833@gmail.com> All rights reserved.
 #
 # Licensed under the MIT license <http://opensource.org/licenses/MIT>
 #
@@ -58,6 +58,8 @@ if [ -f ./$VOBX_FILE ]; then
 else
 	axel -n 10 ${VBOX_URL}
 fi
+sudo dpkg -i ${VBOX_FILE}
+sudo apt-get -f install
 sudo dpkg -i ${VBOX_FILE}
 cd ${UPDIR}
 # rm -rvf ./${TMP_FOLD}
