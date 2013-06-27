@@ -66,7 +66,7 @@ else
 fi
 
 # download tools
-sudo apt-get install wget axel
+sudo apt-get install wget axel curl
 
 # download zip file
 wget ${URL_INIT_SOURCE_FILE}
