@@ -68,6 +68,15 @@ fi
 # download tools
 sudo apt-get install wget axel
 
+# download zip file
+wget ${URL_INIT_SOURCE_FILE}
+if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
+	echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
+	rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
+fi
+unzip ${ZIP_INIT_ANDROID_ENV_FILE}
+
+# add 163 source
 read -p "If you need to add 163 source? [y/N]" var
 while [ -n $var ]; do
 	case $var in
@@ -79,37 +88,31 @@ while [ -n $var ]; do
 					echo "${URL_INIT_SOURCE_FILE} is exist"
 					rm -rvf ${URL_INIT_SOURCE_FILE}
 				fi
-				wget ${URL_INIT_SOURCE_FILE}
-				if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
-					echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
-					rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
-				fi
-				unzip ${ZIP_INIT_ANDROID_ENV_FILE}
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
-
-				# Here musst be update, upgrade, dist-upgrade
-				sudo apt-get update;
-				sudo apt-get upgrade;
-				suod apt-get dist-upgrade;
-
-				# Give tips for install virtualbox or not
-				read -p "If you want install virtualbox? [y/N]" vbox
-				while [ -n $vbox ]; do
-					case $vbox in
-						y|Y|yes|Yes)
-							echo "Install virtualbox ..."
-							sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
-							break;;
-						*)
-							echo "Not install virtualbox"
-							breka;;
-					esac
-				done
 			fi
 			break;;
 		*)
 			echo "You have choose not to add source"
 			break;;
+	esac
+done
+
+# Here musst be update, upgrade, dist-upgrade
+sudo apt-get update;
+sudo apt-get upgrade;
+sudo apt-get dist-upgrade;
+
+# Give tips for install virtualbox or not
+read -p "If you want install virtualbox? [y/N]" vbox
+while [ -n $vbox ]; do
+	case $vbox in
+		y|Y|yes|Yes)
+			echo "Install virtualbox ..."
+			sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
+			break;;
+		*)
+			echo "Not install virtualbox"
+			breka;;
 	esac
 done
 
