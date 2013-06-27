@@ -113,7 +113,7 @@ while [ -n $vbox ]; do
 			break;;
 		*)
 			echo "Not install virtualbox"
-			breka;;
+			break;;
 	esac
 done
 
