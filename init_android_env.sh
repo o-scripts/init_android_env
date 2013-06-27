@@ -70,12 +70,22 @@ echo "Install tools for download code"
 sudo apt-get install wget axel curl vim git ssh sshfs gitk
 
 # download zip file
-wget ${URL_INIT_SOURCE_FILE}
-if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
-	echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
-	rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
-fi
-unzip ${ZIP_INIT_ANDROID_ENV_FILE}
+read -p "Download script package for init env[y|N]" src
+while [ -n $src ]; do
+	case $srd in
+		y|Y|yes|Yes)
+			wget ${URL_INIT_SOURCE_FILE}
+			if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
+				echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
+				rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
+			fi
+			unzip ${ZIP_INIT_ANDROID_ENV_FILE}
+			break;;
+		*)
+			echo "Not download ${URL_INIT_SOURCE_FILE}"
+			break;;
+	esac
+done
 
 # add 163 source
 read -p "If you need to add 163 source? [y/N]" var
@@ -99,6 +109,7 @@ while [ -n $var ]; do
 done
 
 # Here musst be update, upgrade, dist-upgrade
+echo "Step 3. Update your source list"
 sudo apt-get update;
 sudo apt-get upgrade;
 sudo apt-get dist-upgrade;
@@ -117,13 +128,20 @@ while [ -n $vbox ]; do
 	esac
 done
 
-# update source
-echo "Step 3. Update your source list"
-sudo apt-get update
-
 # install sun-java6-jdk
-echo "Step 4. Install jdk"
-sudo apt-get install sun-java6-jdk
+echo "Step 4. Install jdk6"
+read -p "If you want install sun-java6-jdki[y|N]" jdk
+while []; do
+	case $jdk in
+		y|Y|yes|Yes)
+			echo "sudo apt-get install sun-java6-jdk";
+			sudo apt-get install sun-java6-jdk;
+			break;;
+		*)
+			echo "Not install jdk6"
+			break;;
+	esac
+done
 
 # ubuntu 10.04 -- 11.10
 echo "Step 5. Install some tools need for build"
@@ -164,6 +182,7 @@ while [ -n ${arch_t} ]; do
 done
 GOOGLE_ADT_URL=${GOOGLE_ADT_HOST}${adt_file}
 echo ${GOOGLE_ADT_URL}
+
 # download
 read -p "Download ${GOOGLE_ADT_URL} or not?[y/N]" dw
 while [ -n $dw ]; do
@@ -237,8 +256,20 @@ fi
 
 # clear tmp file, folder
 echo "Step 11. Clean tmp file, folder"
-rm -rvf "${HOME}/${TMP_FOLD}"
+read -p "Make sure to clean tmp file[y|N]" cls
+while [ -n $cls ]; do
+	case $cls in
+		y|Y|yes|Yes)
+			rm -rvf "${HOME}/${TMP_FOLD}"
+			break;;
+		*)
+			echo "Not delete tmp file"
+			break;;
+	esac
+done
+
 echo "Last Step:
-Now you can use below command to available set now
-\"source ~/.bashrc\"
-After this just build you code"
+	Now you can use below command to available set now
+	\"source ~/.bashrc\"
+	After this just build you code
+	Enjoy your coding journey!"
