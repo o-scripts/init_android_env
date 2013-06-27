@@ -58,9 +58,19 @@ if [ -f ./$VOBX_FILE ]; then
 else
 	axel -n 10 ${VBOX_URL}
 fi
-sudo dpkg -i ${VBOX_FILE}
-sudo apt-get -f install
-sudo dpkg -i ${VBOX_FILE}
+
+read -p "If you want install now?[y|N]" vbi
+case $vbi in
+	y|Y|yes|Yes)
+		sudo dpkg -i ${VBOX_FILE}
+		sudo apt-get -f install
+		sudo dpkg -i ${VBOX_FILE}
+		break;;
+	*)
+		echo "You can install it with this deb package, while you not clean tmp file."
+		break;;
+esac
+
 cd ${UPDIR}
 # rm -rvf ./${TMP_FOLD}
 
