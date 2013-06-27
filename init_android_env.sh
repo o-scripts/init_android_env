@@ -65,8 +65,9 @@ else
 	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy-updates main multiverse"
 fi
 
-# download tools
-sudo apt-get install wget axel curl
+# for ssh, git, wget, axel
+echo "Step 6. Install tools for download code"
+sudo apt-get install wget axel curl vim git ssh sshfs gitk
 
 # download zip file
 wget ${URL_INIT_SOURCE_FILE}
