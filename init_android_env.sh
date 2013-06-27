@@ -66,7 +66,7 @@ else
 fi
 
 # for ssh, git, wget, axel
-echo "Step 6. Install tools for download code"
+echo "Install tools for download code"
 sudo apt-get install wget axel curl vim git ssh sshfs gitk
 
 # download zip file
