@@ -36,8 +36,6 @@ ARCH_VER="i386"
 TMP_FOLD=".tmp"
 UPDIR=".."
 VBOX_HOST="http://download.virtualbox.org/virtualbox/4.2.12/"
-VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
-VBOX_URL=${VBOX_HOST}${VBOX_FILE}
 
 while [ -n ${ARCH} ]; do
 	case ${ARCH} in
@@ -49,6 +47,9 @@ while [ -n ${ARCH} ]; do
 			break;;
 	esac
 done
+
+VBOX_FILE="virtualbox-4.2_4.2.12-84980~Ubuntu~${OS_VER}_${ARCH_VER}.deb"
+VBOX_URL=${VBOX_HOST}${VBOX_FILE}
 
 mkdir -p ./${TMP_FOLD}
 cd ./${TMP_FOLD}
