@@ -131,7 +131,7 @@ done
 # install sun-java6-jdk
 echo "Step 4. Install jdk6"
 read -p "If you want install sun-java6-jdki[y|N]" jdk
-while []; do
+while [ -n $jdk ]; do
 	case $jdk in
 		y|Y|yes|Yes)
 			echo "sudo apt-get install sun-java6-jdk";
