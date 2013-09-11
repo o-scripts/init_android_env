@@ -162,6 +162,11 @@ sudo apt-get install vim git gitk ssh sshfs wget axel
 echo "Step 7. Install gcc, g++ for 4.5"
 sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
 
+echo 'Set gcc/g++ to version 4.5'
+sudo rm -vf /usr/bin/gcc /usr/bin/g++
+sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
+sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
+
 # download adt, which include eclipse, sdk
 echo "Step 8. Download eclipse and sdk"
 curl ${GOOGLE_DEVELOPER_URL} > google.html
