@@ -55,9 +55,9 @@ mkdir -p ./${TMP_FOLD}
 cd ./${TMP_FOLD}
 
 if [ -f ./$VOBX_FILE ]; then
-	echo "${VBOX_FILE} is exist."
+	echo "${VBOX_FILE} is exist.";
 else
-	axel -n 10 ${VBOX_URL}
+	axel -an 10 ${VBOX_URL};
 fi
 
 read -p "If you want install now?[y|N]" vbi
@@ -66,10 +66,12 @@ case $vbi in
 		sudo dpkg -i ${VBOX_FILE}
 		sudo apt-get -f install
 		sudo dpkg -i ${VBOX_FILE}
-		break;;
+		#break;;
+		;;
 	*)
 		echo "You can install it with this deb package, while you not clean tmp file."
-		break;;
+		#break;;
+		;;
 esac
 
 cd ${UPDIR}

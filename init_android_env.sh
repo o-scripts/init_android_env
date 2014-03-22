@@ -208,6 +208,7 @@ if [ -e ~/android ]; then
 	while [ -n ${isDel} ]; do
 		case ${isDel} in
 			y|Y|yes|Yes)
+				echo 'This will uncompassed package'${adt_file}
 				unzip -x ${adt_file}
 				adt_folder=`echo ${adt_file} | cut -d'.' -f 1`
 				rm -rvf ~/android
