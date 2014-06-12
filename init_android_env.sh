@@ -33,6 +33,7 @@ VERSION="0.2"
 
 # Get arch Info
 arch_t=`uname -i`
+Codename=`lsb_release -c | awk '{print $2}'`
 PROJECT_NAME="init_android_env"
 PROJECT_BRANCH="master"
 INIT_SOURCE_FILE="init_source_env.sh"
@@ -47,6 +48,7 @@ SOURCE_URL="http://archive.ubuntu.com/ubuntu"
 GOOGLE_DEVELOPER_URL="http://developer.android.com/sdk/index.html#download"
 GOOGLE_ADT_HOST="http://dl.google.com/android/adt/"
 GOOGLE_ADT_URL=""
+THREAD=10
 
 cd ${HOME}
 echo "Step 1. Create need folder"
@@ -60,13 +62,14 @@ echo "${IS_EXIST}"
 if [ "${SOURCE_URL}" = "${IS_EXIST}" ]; then
 	echo "Have add, not add again"
 else
-	sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
-	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy main multiverse"
-	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy-updates main multiverse"
+	echo sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
+	echo sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy main multiverse"
+	echo sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu hardy-updates main multiverse"
 fi
 
 # for ssh, git, wget, axel
 echo "Install tools for download code"
+echo sudo apt-get install wget axel curl vim git ssh sshfs gitk
 sudo apt-get install wget axel curl vim git ssh sshfs gitk
 
 # download zip file
@@ -77,6 +80,7 @@ while [ -n $src ]; do
 			wget ${URL_INIT_SOURCE_FILE}
 			if [ -e "./${PROJECT_NAME}-${PROJECT_BRANCH}" ]; then
 				echo "./${PROJECT_NAME}-${PROJECT_BRANCH} is exist."
+				echo rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
 				rm -rvf "./${PROJECT_NAME}-${PROJECT_BRANCH}"
 			fi
 			unzip ${ZIP_INIT_ANDROID_ENV_FILE}
@@ -97,8 +101,10 @@ while [ -n $var ]; do
 			else
 				if [ -e ${URL_INIT_SOURCE_FILE} ]; then
 					echo "${URL_INIT_SOURCE_FILE} is exist"
+					echo rm -rvf ${URL_INIT_SOURCE_FILE}
 					rm -rvf ${URL_INIT_SOURCE_FILE}
 				fi
+				echo sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
 				sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_SOURCE_FILE}"
 			fi
 			break;;
@@ -110,9 +116,20 @@ done
 
 # Here musst be update, upgrade, dist-upgrade
 echo "Step 3. Update your source list"
-sudo apt-get update;
-sudo apt-get upgrade;
-sudo apt-get dist-upgrade;
+read -p "Do you want to update your package managements? [y/N]" up
+case $up in
+	y|Y|yes|Yes|YES)
+		echo sudo apt-get update;
+		sudo apt-get update;
+		echo sudo apt-get upgrade;
+		sudo apt-get upgrade;
+		echo sudo apt-get dist-upgrade;
+		sudo apt-get dist-upgrade;
+		;;
+	*)
+		echo not update
+		;;
+esac
 
 # Give tips for install virtualbox or not
 read -p "If you want install virtualbox? [y/N]" vbox
@@ -120,6 +137,7 @@ while [ -n $vbox ]; do
 	case $vbox in
 		y|Y|yes|Yes)
 			echo "Install virtualbox ..."
+			echo sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
 			sh "./${PROJECT_NAME}-${PROJECT_BRANCH}/${INIT_VBOX_FILE}"
 			break;;
 		*)
@@ -130,11 +148,11 @@ done
 
 # install sun-java6-jdk
 echo "Step 4. Install jdk6"
-read -p "If you want install sun-java6-jdki[y|N]" jdk
+read -p "If you want install sun-java6-jdk[y|N]" jdk
 while [ -n $jdk ]; do
 	case $jdk in
 		y|Y|yes|Yes)
-			echo "sudo apt-get install sun-java6-jdk";
+			echo sudo apt-get install sun-java6-jdk;
 			sudo apt-get install sun-java6-jdk;
 			break;;
 		*)
@@ -143,32 +161,89 @@ while [ -n $jdk ]; do
 	esac
 done
 
-# ubuntu 10.04 -- 11.10
+echo "Codename is : "$Codename
 echo "Step 5. Install some tools need for build"
-sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev x11proto-core-dev libx11-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown  libxml2-utils xsltproc
-# ubuntu 12.04
-sudo apt-get install git gnupg flex bison gperf build-essential zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32 tofrodos  python-markdown libxml2-utils xsltproc zlib1g-dev:i386
-# maybe error package
-echo "NOTICE: The follow package maybe install failed"
-sudo apt-get install lib32ncurses5-dev ia32-libs lib32readline5-dev lib32z-dev
-# ubuntu 11.10
-sudo apt-get install libx11-dev:i386
+case $Codename in
+	'lucid'|'maverick'|'natty'|'oneiric')
+		# ubuntu 10.04 -- 11.10
+		echo "Your ubuntu is between 10.04 and 11.10. Just install bellow package."
+		echo sudo apt-get install git-core gnupg flex bison gperf build-essential \
+				zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs \
+				x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev \
+				libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
+				libxml2-utils xsltproc
+		sudo apt-get install git-core gnupg flex bison gperf build-essential \
+				zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs \
+				x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev \
+				libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
+				libxml2-utils xsltproc
+		;;
+	'precise')
+		# ubuntu 12.04
+		echo "Your ubuntu is 12.04. Just install bellow package."
+		echo sudo apt-get install git gnupg flex bison gperf build-essential \
+				zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
+			    libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
+				libgl1-mesa-dev g++-multilib mingw32 tofrodos \
+				python-markdown libxml2-utils xsltproc zlib1g-dev:i386
+		sudo apt-get install git gnupg flex bison gperf build-essential \
+				zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
+			    libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
+				libgl1-mesa-dev g++-multilib mingw32 tofrodos \
+				python-markdown libxml2-utils xsltproc zlib1g-dev:i386
+		echo sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
+		sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
+		;;
+	*)
+		;;
+esac
+
+case $Codename in
+	'maverick')
+		echo sudo ln -s /usr/lib32/mesa/libGL.so.1 /usr/lib32/mesa/libGL.so
+		sudo ln -s /usr/lib32/mesa/libGL.so.1 /usr/lib32/mesa/libGL.so
+		;;
+	'oneiric')
+		echo sudo apt-get install libx11-dev:i386
+		sudo apt-get install libx11-dev:i386
+		;;
+esac
+
+## remove this block
+if false
+then
+	# maybe error package
+	echo "NOTICE: The follow package maybe install failed"
+	echo sudo apt-get install lib32ncurses5-dev ia32-libs lib32readline5-dev lib32z-dev
+	sudo apt-get install lib32ncurses5-dev ia32-libs lib32readline5-dev lib32z-dev
+	# ubuntu 11.10
+	echo sudo apt-get install libx11-dev:i386
+	sudo apt-get install libx11-dev:i386
+fi
 
 # for ssh, git, wget, axel
 echo "Step 6. Install tools for download code"
+echo sudo apt-get install vim git gitk ssh sshfs wget axel
 sudo apt-get install vim git gitk ssh sshfs wget axel
 
 # install gcc 4.5 or 4.4
-echo "Step 7. Install gcc, g++ for 4.5"
-sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
-
-echo 'Set gcc/g++ to version 4.5'
-sudo rm -vf /usr/bin/gcc /usr/bin/g++
-sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
-sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
+if false
+then
+	echo "Step 7. Install gcc, g++ for 4.5"
+	echo sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
+	sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
+	echo 'Set gcc/g++ to version 4.5'
+	echo sudo rm -vf /usr/bin/gcc /usr/bin/g++
+	sudo rm -vf /usr/bin/gcc /usr/bin/g++
+	echo sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
+	sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
+	echo sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
+	sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
+fi
 
 # download adt, which include eclipse, sdk
 echo "Step 8. Download eclipse and sdk"
+echo "curl ${GOOGLE_DEVELOPER_URL} > google.html"
 curl ${GOOGLE_DEVELOPER_URL} > google.html
 while [ -n ${arch_t} ]; do
 	case ${arch_t} in
@@ -193,7 +268,8 @@ read -p "Download ${GOOGLE_ADT_URL} or not?[y/N]" dw
 while [ -n $dw ]; do
 	case ${dw} in
 		y|Y|yes|Yes)
-			axel -n 10 ${GOOGLE_ADT_URL};
+			echo axel -an ${THREAD} ${GOOGLE_ADT_URL};
+			axel -an ${THREAD} ${GOOGLE_ADT_URL};
 			break;;
 		*)
 			echo "Not download ${GOOGLE_ADT_URL}";
@@ -209,6 +285,7 @@ if [ -e ~/android ]; then
 		case ${isDel} in
 			y|Y|yes|Yes)
 				echo 'This will uncompassed package'${adt_file}
+				echo unzip -x ${adt_file}
 				unzip -x ${adt_file}
 				adt_folder=`echo ${adt_file} | cut -d'.' -f 1`
 				rm -rvf ~/android
@@ -220,6 +297,9 @@ if [ -e ~/android ]; then
 		esac
 	done
 fi
+
+echo "Exit this system ........"
+exit 0
 
 # set gcc for 4.5 or 4.4
 echo "Step 9. Set gcc, g++"
