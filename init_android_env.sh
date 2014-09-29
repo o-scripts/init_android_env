@@ -230,15 +230,8 @@ sudo apt-get install vim git gitk ssh sshfs wget axel
 if false
 then
 	echo "Step 7. Install gcc, g++ for 4.5"
-	echo sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
-	sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
-	echo 'Set gcc/g++ to version 4.5'
-	echo sudo rm -vf /usr/bin/gcc /usr/bin/g++
-	sudo rm -vf /usr/bin/gcc /usr/bin/g++
-	echo sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
-	sudo ln -s /usr/bin/gcc-4.5 /usr/bin/gcc
-	echo sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
-	sudo ln -s /usr/bin/g++-4.5 /usr/bin/g++
+	echo sudo apt-get install gcc gcc-multilib g++ g++-multilib
+	sudo apt-get install gcc gcc-multilib g++ g++-multilib
 fi
 
 # download adt, which include eclipse, sdk
@@ -302,23 +295,23 @@ echo "Exit this system ........"
 exit 0
 
 # set gcc for 4.5 or 4.4
-echo "Step 9. Set gcc, g++"
-mkdir -p ~/android/bin
-cd ${HOME}/android/bin
-if [ -e ~/android/bin/gcc ]; then
-	echo "gcc is exist";
-	rm -vf ~/android/bin/gcc;
-	ln -s /usr/bin/gcc-4.5 gcc;
-else
-	ln -s /usr/bin/gcc-4.5 gcc;
-fi
-if [ -e ~/android/bin/g++ ]; then
-	echo "g++ is exist";
-	rm ~/android/bin/g++;
-	ln -s /usr/bin/g++-4.5 g++;
-else
-	ln -s /usr/bin/g++-4.5 g++;
-fi
+# echo "Step 9. Set gcc, g++"
+# mkdir -p ~/android/bin
+# cd ${HOME}/android/bin
+# if [ -e ~/android/bin/gcc ]; then
+# 	echo "gcc is exist";
+# 	rm -vf ~/android/bin/gcc;
+# 	ln -s /usr/bin/gcc-4.5 gcc;
+# else
+# 	ln -s /usr/bin/gcc-4.5 gcc;
+# fi
+# if [ -e ~/android/bin/g++ ]; then
+# 	echo "g++ is exist";
+# 	rm ~/android/bin/g++;
+# 	ln -s /usr/bin/g++-4.5 g++;
+# else
+# 	ln -s /usr/bin/g++-4.5 g++;
+# fi
 
 # go to home
 cd ${HOME}
